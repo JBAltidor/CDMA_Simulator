@@ -1,5 +1,16 @@
 import numpy as np
 import random
+
+#Constantes
+Walsh = np.array([[1,  1,  1,  1,  1,  1,  1,  1],
+[1, -1,  1, -1,  1, -1,  1, -1],
+[1,  1, -1, -1,  1,  1, -1, -1],
+[1, -1, -1,  1,  1, -1, -1,  1],
+[1,  1,  1,  1, -1, -1, -1, -1],
+[1, -1,  1, -1, -1,  1, -1,  1],
+[1,  1, -1, -1, -1, -1,  1,  1],
+[1, -1, -1,  1, -1,  1,  1, -1]])
+
 B = 0.2
 
 def Message_Spreader(message):
@@ -21,8 +32,7 @@ def xor (a,b):
         return 0
     elif (a == b):
         return -1
-    else :
-        return 1
+    return 1
 
 def Noise_Generator(size):
     Noise = []
@@ -60,14 +70,6 @@ def BER (Input , Output):
 
 
 
-Walsh = np.array([[1,  1,  1,  1,  1,  1,  1,  1],
-[1, -1,  1, -1,  1, -1,  1, -1],
-[1,  1, -1, -1,  1,  1, -1, -1],
-[1, -1, -1,  1,  1, -1, -1,  1],
-[1,  1,  1,  1, -1, -1, -1, -1],
-[1, -1,  1, -1, -1,  1, -1,  1],
-[1,  1, -1, -1, -1, -1,  1,  1],
-[1, -1, -1,  1, -1,  1,  1, -1]])
 
 
 
@@ -134,3 +136,8 @@ print ()
 print ("Input User 2 :",Message_User_2)
 print ("Output User 2: ", Received_2)
 print ('BER :',Error_2)
+
+# print ()
+# print (Traffic)
+# print ()
+# print (Message_User_1)

@@ -76,7 +76,7 @@ def BER (Input , Output):
 #Cas 1 : 1 utilisateur et abscence de Bruit
 print('1 utilisateur et abscence de Bruit')
 Key_1           = Walsh[2] 
-Message_User_1  = [1,-1,1,1,1,-1]
+Message_User_1  = [-1, 1, 1, 1, -1, 1, -1, -1, -1, 1, 1, -1, -1, 1, -1, 1, -1, 1, 1, 1, 1, -1, -1, -1, -1, 1, 1, 1, -1, 1, -1, -1, -1, 1, 1, -1, -1, 1, -1, 1, -1, -1, 1, -1, -1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, -1, -1, 1, -1, 1, -1, -1, 1, -1, -1, -1, -1, -1, -1, 1, 1, 1, -1, 1, -1, -1, -1, 1, 1, -1, -1, 1, -1, 1, -1, 1, 1, 1, -1, -1, 1, 1, -1, 1, 1, 1, -1, 1, -1, -1]
 Spreaded        = Message_Spreader(Message_User_1)
 Encoded         = Message_Encoder (Spreaded , Key_1)
 Encoded_to_Volts= [i * -1 for i in Encoded ] # 1 => -1 volt ,0 = 0 voly and -1 = 1 volt

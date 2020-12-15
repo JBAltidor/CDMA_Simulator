@@ -78,11 +78,7 @@ Despreaded = select first bit at every 8 bit
  elif (-1,2 < Despreaded[i] < -0,8) :
  	Message_received[i] = 0
  	
-#Code "Correction" #A reflechir
-if (Message_received_1[i] == Message_received_2[i] == 0):
-	Message_received_1[i] = Random(-1,1)
-	Message_received_2[i] = - Message_received_1[i] 
-	 
+
 
 Bit Error Rate
 --------------

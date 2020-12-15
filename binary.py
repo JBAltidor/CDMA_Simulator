@@ -14,20 +14,39 @@ def binaire_to_ternaire(binaire):
     return Ternaire
 
 def ternaire_to_binaire (ternaire):
-    #remove appending zeros
-    temp = [0 if x==-1 else x for x in ternaire] 
+    #TODO remove appending zeros
+    temp1 = [0 if x==-1 else x for x in ternaire] 
+    temp2 = [str(i) for i in temp1]
     ternaire = ''
-    
+    ternaire = ternaire.join(temp2)
+    return ternaire
+
+def padding (message1,message2):
+    difference = len(message1) - len(message2)
+    print (difference)
+    if difference > 0 :
+        for i in range (difference):
+            message2.append(0)
+    elif difference < 0:
+        for i in range (-difference):
+            message1.append(0)
+
+    return message1,message2
 
 
 text = "texte de test"
 bits = text_to_bits(text)
 text_back = text_from_bits(bits)
 
-print (text)
-print (bits)
+tosend = binaire_to_ternaire(bits)
 
-print (binaire_to_ternaire(bits))
-# print (Converted)
-# print (binaire_to_ternaire(bits))
-print (text_back)
+toreceive = ternaire_to_binaire(tosend)
+
+converted = text_from_bits(toreceive)
+
+print (tosend)
+
+mes1 = [1,-1,1,1,1,-1]
+mes2 = [1,-1,0]
+text1,text2 = padding(mes1,mes2)
+

@@ -13,9 +13,14 @@ def binaire_to_ternaire(binaire):
     Ternaire = [-1 if x==0 else 1 for x in temp]    
     return Ternaire
 
+def pop_zeros(items):
+    while items[-1] == 0:
+        items.pop()
+    return items
+
 def ternaire_to_binaire (ternaire):
-    #TODO remove appending zeros
-    temp1 = [0 if x==-1 else x for x in ternaire] 
+    temp = pop_zeros(ternaire)
+    temp1 = [0 if x==-1 else x for x in temp] 
     temp2 = [str(i) for i in temp1]
     ternaire = ''
     ternaire = ternaire.join(temp2)
@@ -23,7 +28,6 @@ def ternaire_to_binaire (ternaire):
 
 def padding (message1,message2):
     difference = len(message1) - len(message2)
-    print (difference)
     if difference > 0 :
         for i in range (difference):
             message2.append(0)
@@ -40,6 +44,7 @@ text_back = text_from_bits(bits)
 
 tosend = binaire_to_ternaire(bits)
 
+
 toreceive = ternaire_to_binaire(tosend)
 
 converted = text_from_bits(toreceive)
@@ -47,6 +52,6 @@ converted = text_from_bits(toreceive)
 print (tosend)
 
 mes1 = [1,-1,1,1,1,-1]
-mes2 = [1,-1,0]
+mes2 = [1,-1]
 text1,text2 = padding(mes1,mes2)
 

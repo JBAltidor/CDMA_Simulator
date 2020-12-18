@@ -34,7 +34,7 @@ def Start_simulation(nombre_users, bruit, msg):
     action.configure(text='Start')
     print('=========== Start simulation ===========')
     print('---------Number of users: '+nombre_users+' ---------')
-    print('---------Noice: '+str(bruit)+' ---------')
+    print('---------Noise: '+str(bruit)+' ---------')
     print('---------Message: '+msg+' ---------')
 
 # button

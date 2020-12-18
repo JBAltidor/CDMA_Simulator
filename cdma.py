@@ -131,6 +131,19 @@ if __name__ == "__main__":
 
     if (choix == 1):
         #1 Utilisateur et presence de bruit
+        print('1 utilisateur et presence de Bruit')
+        Key_1           = Walsh[2] 
+        Message_User_1  = [1,-1,1,1,1,-1]
+        Spreaded        = Message_Spreader(Message_User_1)
+        Encoded         = Message_Encoder (Spreaded , Key_1)
+        Encoded_to_Volts= [i * -1 for i in Encoded ] # 1 => -1 volt ,0 = 0 volt and -1 = 1 volt
+        Noise           = Noise_Generator(len(Spreaded))
+        Traffic         = Multiplexing_2(Encoded_to_Volts,Noise)
+        Received        = Decoder(Traffic,Key_1)
+        Error           = BER(Message_User_1,Received)
+        print ("Input :",Message_User_1)
+        print ("Output: ", Received)
+        print ('BER :',Error)
 
 
     elif (choix == 2):

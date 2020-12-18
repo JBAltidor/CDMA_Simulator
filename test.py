@@ -1,6 +1,4 @@
 
-
-
 #Cas 1 : 1 utilisateur et abscence de Bruit
 print('1 utilisateur et abscence de Bruit')
 Key_1           = Walsh[2] 

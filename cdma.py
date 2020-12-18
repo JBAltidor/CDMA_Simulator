@@ -91,7 +91,7 @@ def text_from_bits(bits, encoding='utf-8', errors='surrogatepass'):
 
 def binaire_to_ternaire(binaire):
     #Convertit un train binaire en train ternaire (-1,0,1)
-    temp  = [int(x) for x in  list(bits)]
+    temp  = [int(x) for x in  list(binaire)]
     Ternaire = [-1 if x==0 else 1 for x in temp]    
     return Ternaire
 

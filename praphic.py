@@ -43,8 +43,10 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
     print('=========== Start simulation ===========')
     print('---------Number of users: '+nombre_users+' ---------')
     print('---------Noise: '+str(bruit)+' ---------')
+
     print('---------Message: '+msg_1+' ---------')
     print('---------Message: '+msg_2+' ---------')
+
 
 # button
 action = ttk.Button(win, text="Start", command= lambda: Start_simulation(numberChosen.get(), chVarUn.get(), msg_1.get('1.0', 'end-1c'), msg_2.get('1.0', 'end-1c')))

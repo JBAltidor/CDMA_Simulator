@@ -67,3 +67,6 @@ print ('BER :',Error_2)
 # print (Traffic)
 # print ()
 # print (Message_User_1)
+
+def tosend (txt) :
+    return binaire_to_ternaire(text_to_bits(txt))

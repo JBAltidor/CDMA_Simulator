@@ -91,7 +91,7 @@ def text_from_bits(bits, encoding='utf-8', errors='surrogatepass'):
 
 def binaire_to_ternaire(binaire):
     #Convertit un train binaire en train ternaire (-1,0,1)
-    temp  = [int(x) for x in  list(bits)]
+    temp  = [int(x) for x in  list(binaire)]
     Ternaire = [-1 if x==0 else 1 for x in temp]    
     return Ternaire
 
@@ -124,37 +124,49 @@ def padding (message1,message2):
 #__________________________________________________________________________________________________#
 
 #Driver code
-if __name__ == "__main__":
-    print ("\t \t Code Division Multiple Access-Simulation\n")
-    print ("*(1) 1 Utilisateur et presence de bruit.\n*(2) 1 Utilisateur et absence de bruit.\n*(3) 2 Utilisateurs et presence de bruit.\n*(4) 2 Utilisateurs et absence de bruit.\n")
-    choix = input ("> Choisissez le numero de votre option : ")
+# if __name__ == "__main__":
+#     print ("\t \t Code Division Multiple Access-Simulation\n")
+#     print ("*(1) 1 Utilisateur et presence de bruit.\n*(2) 1 Utilisateur et absence de bruit.\n*(3) 2 Utilisateurs et presence de bruit.\n*(4) 2 Utilisateurs et absence de bruit.\n")
+#     choix = input ("> Choisissez le numero de votre option : ")
 
-    if (choix == 1):
-        #1 Utilisateur et presence de bruit
-        print('1 utilisateur et presence de Bruit')
-        Key_1           = Walsh[2] 
-        Message_User_1  = [1,-1,1,1,1,-1]
-        Spreaded        = Message_Spreader(Message_User_1)
-        Encoded         = Message_Encoder (Spreaded , Key_1)
-        Encoded_to_Volts= [i * -1 for i in Encoded ] # 1 => -1 volt ,0 = 0 volt and -1 = 1 volt
-        Noise           = Noise_Generator(len(Spreaded))
-        Traffic         = Multiplexing_2(Encoded_to_Volts,Noise)
-        Received        = Decoder(Traffic,Key_1)
-        Error           = BER(Message_User_1,Received)
-        print ("Input :",Message_User_1)
-        print ("Output: ", Received)
-        print ('BER :',Error)
-
-
-    elif (choix == 2):
-        #1 Utilisateur et absence de bruit.
-
-    elif (choix == 3) :
-        #2 Utilisateurs et presence de bruit.
-
-    elif (choix == 4) :
-        #2 Utilisateurs et absence de bruit.
+#     if (choix == 1):
+#         #1 Utilisateur et presence de bruit
+#         print('1 utilisateur et presence de Bruit')
+#         Key_1           = Walsh[2] 
+#         Message_User_1  = [1,-1,1,1,1,-1]
+#         Spreaded        = Message_Spreader(Message_User_1)
+#         Encoded         = Message_Encoder (Spreaded , Key_1)
+#         Encoded_to_Volts= [i * -1 for i in Encoded ] # 1 => -1 volt ,0 = 0 volt and -1 = 1 volt
+#         Noise           = Noise_Generator(len(Spreaded))
+#         Traffic         = Multiplexing_2(Encoded_to_Volts,Noise)
+#         Received        = Decoder(Traffic,Key_1)
+#         Error           = BER(Message_User_1,Received)
+#         print ("Input :",Message_User_1)
+#         print ("Output: ", Received)
+#         print ('BER :',Error)
 
 
-    else :
-        exit ()
+#     elif (choix == 2):
+#         #1 Utilisateur et absence de bruit.
+
+#     elif (choix == 3) :
+#         #2 Utilisateurs et presence de bruit.
+
+#     elif (choix == 4) :
+#         #2 Utilisateurs et absence de bruit.
+
+
+#     else :
+#         exit ()
+def tosend (txt) :
+    return binaire_to_ternaire(text_to_bits(txt))
+
+def toreceive (bits):
+    return text_from_bits(ternaire_to_binaire(bits))
+
+test1 = "Texte de test."
+test2 = "testo"
+
+mess1,mess2 = padding(tosend(test1),tosend(test2))
+print(toreceive(mess1))
+print(toreceive(mess2))

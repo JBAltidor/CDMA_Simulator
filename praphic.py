@@ -43,17 +43,38 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
     action.configure(text='Start')
     print('=========== Start simulation ===========')
     print('---------Number of users: '+nombre_users+' ---------')
-    print('---------Noise: '+str(bruit)+' ---------')
+    nois = 'Oui' if bruit == 1 else 'Non'
+    print('---------Noise: '+str(nois)+' ---------')
 
     print('---------Message: '+msg_1+' ---------')
     print('---------Message: '+msg_2+' ---------')
+
     if (nombre_users == '1'):
         Key = cdma.Walsh()[2] 
         Encoded_Volt = cdma.User_sending(msg_1,Key)
         if (bruit == 1):
             Traffic = cdma.Multiplexing_2 (Encoded_Volt ,cdma.Noise_Generator(len(Encoded_Volt)))
         else : Traffic = Encoded_Volt
+        print(Key)
+        print(Traffic)
         print(cdma.User_receiving(Traffic,Key))
+    elif (nombre_users == '2'):
+        Key_1 = cdma.Walsh()[2] 
+        Key_2 = cdma.Walsh()[3] 
+        Encoded_Volt_1 = cdma.User_sending(msg_1,Key_1)
+        Encoded_Volt_2 = cdma.User_sending(msg_2,Key_2)
+        if (bruit == 1):
+            m1,m2=cdma.padding(Encoded_Volt_1,Encoded_Volt_2)
+            Traffic = cdma.Multiplexing(m1,m2,cdma.Noise_Generator(len(m1)))
+        else : Traffic = cdma.Multiplexing_2(*cdma.padding(Encoded_Volt_1,Encoded_Volt_2))
+
+        print(Key_1)
+        print(Key_2)
+        print(Traffic)
+        print(cdma.User_receiving(Traffic,Key_1))
+        print(cdma.User_receiving(Traffic,Key_2))
+
+
    
 
 
@@ -63,3 +84,8 @@ action.grid(column=2, row=7)
 # action.configure(state='disabled')
 
 win.mainloop()
+
+
+
+# Je trouve vraiment ca ridicule de mettre ces etapes, cuz 
+# donnees yo trop incomprehensibles

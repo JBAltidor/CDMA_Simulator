@@ -1,9 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import scrolledtext
-import cdma
+import cdma as cdma
+import signals as graph
 
-# window
 win = tk.Tk()
 win.title("CDMA Simulator")
 # win.resizable(0,0)
@@ -47,13 +47,13 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
 
     print('---------Message: '+msg_1+' ---------')
     print('---------Message: '+msg_2+' ---------')
-    if (nombre_users == 1):
-        Key = Walsh[2] 
-        Encoded_Volt = User_sending(msg_1,key)
-        if (noise == 1):
-            Traffic = Multiplexing_2 (Encoded_Volt ,Noise_Generator(len(Encoded_Volt)))
+    if (nombre_users == '1'):
+        Key = cdma.Walsh()[2] 
+        Encoded_Volt = cdma.User_sending(msg_1,Key)
+        if (bruit == 1):
+            Traffic = cdma.Multiplexing_2 (Encoded_Volt ,cdma.Noise_Generator(len(Encoded_Volt)))
         else : Traffic = Encoded_Volt
-        print(User_receiving(Traffic,Key))
+        print(cdma.User_receiving(Traffic,Key))
    
 
 

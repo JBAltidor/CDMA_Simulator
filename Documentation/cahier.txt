@@ -1,13 +1,13 @@
-Modifications
+Modifications (version 4)
 -------------
 -les messages ont des trians ternaires au lieu de binaire (1,-1) message et 0 absence de message
 -matrice de Walsh ,0 devient -1
 -Voltage ajout 0 => 0 volt
--Ajout de padding (suite de 0 a la fin du message le plus cours )
+-Ajout de padding : suite de 0 a la fin du message le plus court pour ramener a la meme longueur dans le cas de 2 utilisateurs
 
 
 
-CDMA v2
+CDMA 
 ------------------
 Multiplexer ds messages sur un canal par a technique CDMA, decoder ces messages a a la reception et determiner le taux d'erreur binaire.(Bit Error Rate /BER)
 
@@ -17,19 +17,14 @@ Multiplexer ds messages sur un canal par a technique CDMA, decoder ces messages 
 4) 2 utilisateurs avec bruit
 
 Utilisateur :generateur d'un message
-Message	: train binaire equivalent aux donnees envoyees par l'utilisateur
+Message	: train ternaire (-1,0,1) equivalent aux donnees envoyees par l'utilisateur
 Bruit 	:Facteur pouvant alterer un message transitant sur le canal
-
-#Hyphotheses supplementaires
-+Le systeme est synchrone 
-+
-
 
 
 Representation
 --------------
 Utilisateur :?
-Message     : Vecteur binaire de dimension N .
+Message     : Vecteur ternaire de dimension N .
 Bruit	     :Vecteur de bit aleatoires avec B= A/5 et A = 1.  Noise = B*Random([-1,0,1]) de dimension S
 
 Code de Walsh : matrice binaire 8*8 W = 
@@ -49,7 +44,7 @@ Code utilisateur 2:Key_2 = W[3]
 Processing
 ----------
 #Encoding
-Spreaded message : Vecteur binaire de dimension S = N*8. 
+Spreaded message : Vecteur ternaire de dimension S = N*8. Chaque element du message est repete de la longueur de la cle (ie 8 fois)
 Encoded message  :XOR de spreaded message and Key
 
 -Message spreading
@@ -57,33 +52,26 @@ Encoded message  :XOR de spreaded message and Key
 - Message encoding
  Encoded = Spreaded xor Code
 
-#Binaire to voltage
--1=> -1 volt, 0=> 0 volt 1 => 1 volt pour message encode
-Encoded_Volt = encoded Representation en volt du message binaire
-Key_1_Volt = 
-Key_2_Volt =
+#Ternaire to voltage
+-1=> 1 volt, 0=> 0 volt 1 => -1 volt pour message encode
+Encoded_Volt = -1 * encoded :Representation en volt du message ternaire
+
 
 #Multiplexage
-Traffic = Encoded_Volt[1] + Encoded_Volt[2] + Noise
+Traffic = Encoded_Volt[1] + Encoded_Volt[2] + Noise. Cas 2 utilisateurs + bruit
+Traffic = Encoded_Volt[1] + Encoded_Volt[2] . Cas 2 utilisateurs sans bruit
+...
 
 Restitution
 ------------
-Decoded_i   = Traffic * Key_i_Volt #Restitution de message decode par utilisateur
-Despreaded = select first bit at every 8 bit
+Decoded_i   = Traffic ** Key_i_Volt #Restitution de message decode par utilisateur
+On realise un produit exterieur entre des groupes de 8 bits du traffic recu et la cle de l'utilisateur.
+On divise ce resulat par la longueur de la cle et l'arrondit.
 
-#Voltage to binaire
--cas 1 ou 2 utilisateurs + bruit
- if ( 0,8 < Despreaded[i] < 1,2 ):
- 	Message_received[i] = 0
- elif (-1,2 < Despreaded[i] < -0,8) :
- 	Message_received[i] = 0
- 	
 
 
 Bit Error Rate
 --------------
-if (Message[i] <> Message_received[i]):
-	error++
-	
-BER = error / len (Message)
+BER = diff (input,output)
+nmbre de bits errones / nombre total de bits
 

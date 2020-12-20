@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import scrolledtext
 import cdma as cdma
-import signals as graph
+#import signals as graph
 
 win = tk.Tk()
 win.title("CDMA Simulator")
@@ -42,12 +42,12 @@ if(numberChosen.get() == 1):
 def Start_simulation(nombre_users, bruit, msg_1, msg_2):
     action.configure(text='Start')
     print('=========== Start simulation ===========')
-    print('---------Number of users: '+nombre_users+' ---------')
+    print('Nombre d utilisateurs: '+nombre_users)
     nois = 'Oui' if bruit == 1 else 'Non'
-    print('---------Noise: '+str(nois)+' ---------')
+    print('Bruit: '+str(nois))
 
-    print('---------Message: '+msg_1+' ---------')
-    print('---------Message: '+msg_2+' ---------')
+    print('Message 1: '+msg_1)
+    print('Message 2: '+msg_2)
 
     if (nombre_users == '1'):
         Key = cdma.Walsh()[2] 
@@ -55,9 +55,10 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         if (bruit == 1):
             Traffic = cdma.Multiplexing_2 (Encoded_Volt ,cdma.Noise_Generator(len(Encoded_Volt)))
         else : Traffic = Encoded_Volt
-        print(Key)
-        print(Traffic)
-        print(cdma.User_receiving(Traffic,Key))
+        print("La cle de l'utilisateur est :",Key, "\n")
+        print("\nTraffic transitant sur le canal \n",Traffic,'\n')
+        print("Message a la reception : ",cdma.User_receiving(Traffic,Key))
+        print ("\nLe Bit Error Rate est :",cdma.BER(cdma.binaire_to_ternaire(cdma.text_to_bits(msg_1)), cdma.Decoder(Traffic,Key)))
     elif (nombre_users == '2'):
         Key_1 = cdma.Walsh()[2] 
         Key_2 = cdma.Walsh()[3] 
@@ -68,12 +69,13 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
             Traffic = cdma.Multiplexing(m1,m2,cdma.Noise_Generator(len(m1)))
         else : Traffic = cdma.Multiplexing_2(*cdma.padding(Encoded_Volt_1,Encoded_Volt_2))
 
-        print(Key_1)
-        print(Key_2)
-        print(Traffic)
-        print(cdma.User_receiving(Traffic,Key_1))
-        print(cdma.User_receiving(Traffic,Key_2))
-
+        print("La cle de l'utilisateur 1 est :",Key_1)
+        print("La cle de l'utilisateur 2 est :",Key_2)
+        print("\nTraffic transitant sur le canal \n",Traffic,'\n')
+        print("Message a la reception pour l'utilisateur 1 : ",cdma.User_receiving(Traffic,Key_1))
+        print("Message a la reception pour l'utilisateur 2 : ",cdma.User_receiving(Traffic,Key_2))
+        print ("\nLe Bit Error Rate pour l'utilisateur 1 est :",cdma.BER(cdma.binaire_to_ternaire(cdma.text_to_bits(msg_1)), cdma.Decoder(Traffic,Key_1)))
+        print ("\nLe Bit Error Rate pour l'utilisateur 2 est :",cdma.BER(cdma.binaire_to_ternaire(cdma.text_to_bits(msg_2)), cdma.Decoder(Traffic,Key_2)))
 
    
 

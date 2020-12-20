@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import scrolledtext
 import cdma as cdma
-#import signals as graph
+import signals as graph
 
 win = tk.Tk()
 win.title("CDMA Simulator")

@@ -1,4 +1,5 @@
 import numpy as np
+import math
 import random
 
 #Constantes
@@ -42,11 +43,22 @@ def xor (a,b):
         return -1
     return 1
 
+def Volt_Encoder(Encoded):
+    #Permet de faire le mapping entre une valeur binaire et une plage de volt
+    Volt_Encoded = []
+    for i in range (len(Encoded)):
+        volt = random.uniform(0.5,1.5)
+        if Encoded[i]==1:
+            volt = -volt
+        Volt_Encoded.append(volt)
+    return Volt_Encoded
+        
+
 def Noise_Generator(size):
     #Genere un bruit aleatoire de la meme longueur que le message
     Noise = []
     for i in range (0,size):
-        Noise.append(B*random.randint(-1,1))
+        Noise.append(B*random.uniform(-1,1))
     return Noise
 
 def Multiplexing (User_1 , User_2 , Noise):
@@ -65,10 +77,22 @@ def Multiplexing_2 (User_1 , Noise):
 def Decoder(Traffic , key):
     #Recupere les message a la reception 
     Decoded = []
+    Received = []
     for i in range(0, len(Traffic), 8):
         temp= Traffic[i:i + 8]
         result = np.inner(temp,key)
-        Decoded.append(result/8)      
+        Decoded.append(result/8)  
+        # for i in range (len(Decoded)):
+        #     x=math.ceil(i)
+        #     if (x>1):
+        #         x=1
+        #     elif x<-1:
+        #         x=-1
+        # Received.append(x)
+        # print (Received)
+
+        print(Decoded)
+
     Received =[round(x) for x in Decoded]
     return Received
 
@@ -125,10 +149,11 @@ def padding (message1,message2):
 
     return message1,message2
 
+
 #--------------------------------------------------------------------------------------------
 def User_sending (txt,key):
     #conversion txt => volts
-    return [i * -1 for i in Message_Encoder(Message_Spreader(binaire_to_ternaire(text_to_bits(txt))),key)]
+    return [i  for i in  Volt_Encoder(Message_Encoder(Message_Spreader(binaire_to_ternaire(text_to_bits(txt))),key))]
 
 def User_receiving (traffic,key):
     return text_from_bits(ternaire_to_binaire(Decoder(traffic,key)))

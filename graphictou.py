@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import scrolledtext
-import cdma as cdma
+import cdmatou as cdma
 
 win = tk.Tk()
 def make_menu(w):
@@ -61,7 +61,40 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
 
     print('Message 1: '+msg_1)
     print('Message 2: '+msg_2)
+    #Cas 1 user
+    if nombre_users =='1':
+        Encoded_Volt = cdma.User_sending(msg_1,cdma.Key_1)
+        if (bruit == 1):
+            Traffic = cdma.Multiplexing_2 (Encoded_Volt ,cdma.Noise_Generator(len(Encoded_Volt)))
+        else : Traffic = Encoded_Volt
+    #Cas 2 users
+    elif (nombre_users == '2'): 
+        Encoded_Volt_1 = cdma.User_sending(msg_1,cdma.Key_1)
+        Encoded_Volt_2 = cdma.User_sending(msg_2,cdma.Key_2 )
+        diff =len(Encoded_Volt_1) - len(Encoded_Volt_2)
+        if (bruit == 1):
+            Traffic = cdma.Multiplexing(Encoded_Volt_1,Encoded_Volt_2,cdma.Noise_Generator(max(len(Encoded_Volt_1),len(Encoded_Volt_2))))
+        else : Traffic = cdma.Multiplexing_2(Encoded_Volt_1,Encoded_Volt_2)
+  
+
+    #reception
+    if nombre_users== '1':
+        Reception=cdma.Decoder_1(Traffic,cdma.Key_1)
+        print(Reception)
+        #Back to Text 
+        cdma.Back_to_text(Reception)
+
+    elif nombre_users== '2':
+        Reception_1,Reception_2=cdma.Decoder_2(Traffic,diff)
+        print("Reception 1")
+        print(Reception_1)
+        print("Reception 2")
+        print(Reception_2)
+        #Back to text 
+  
    
+
+
 
 
 if __name__ == '__main__':

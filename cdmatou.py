@@ -74,24 +74,7 @@ def Multiplexing_2 (User_1 , Noise):
         Traffic.append(User_1[i] +  Noise[i])
     return Traffic
 
-def Decoder(Traffic , key):
-    #Recupere les message a la reception 
-    Decoded = []
-    Received = []
-    for i in range(0, len(Traffic), 8):
-        temp= Traffic[i:i + 8]
-        result = np.inner(temp,key)
-        Decoded.append(result/8)  
-    for x in range (len(Decoded)):
-            if (Decoded[x]>0):
-                i=1
-            elif (Decoded[x]<0):
-                i=-1
-            else :
-                i=random.randint(-1,1)
-            Received.append(i)
-  
-    return Received
+
 
 def BER (Input , Output):
     #Calcule le Bit Error Rate
@@ -119,10 +102,6 @@ def binaire_to_ternaire(binaire):
     Ternaire = [-1 if x==0 else 1 for x in temp]    
     return Ternaire
 
-def pop_padding(items,longeur):
-    #Permet de retirer le padding ajoute 
-    del items[-longeur]
-    return items
 
 def ternaire_to_binaire (ternaire):
     #Convertit un train ternaire en train binaire
@@ -133,30 +112,27 @@ def ternaire_to_binaire (ternaire):
     ternaire = ternaire.join(temp2)
     return ternaire
 
-def padding (message1,message2):
-    #Permet de ramener les messages a une meme longueur
-    difference = len(message1) - len(message2)
-    if difference > 0 :
-        for i in range (difference):
-            message2.append(random.randint(-1,1))
-    elif difference < 0:
-        for i in range (-difference):
-            message1.append(random.randint(-1,1))
-
-    return message1,message2,difference
 
 
 #--------------------------------------------------------------------------------------------
-def User_sending (txt,key):
-    #conversion txt => volts
-    return [i  for i in  Volt_Encoder(Message_Encoder(Message_Spreader(binaire_to_ternaire(text_to_bits(txt))),key))]
+# def User_sending (txt,key):
+#     #conversion txt => volts
+#     return [i  for i in  Volt_Encoder(Message_Encoder(Message_Spreader(binaire_to_ternaire(text_to_bits(txt))),key))]
 
-def User_receiving (traffic,key):
-    return text_from_bits(ternaire_to_binaire(Decoder(traffic,key)))
+# def User_receiving (traffic,key):
+#     return text_from_bits(ternaire_to_binaire(Decoder(traffic,key)))
 
 #__________________________________________________________________________________________________#
 
-def DecoderTest1(Traffic,key):
+def User_sending (txt,key):    
+    return Volt_Encoder(Message_Encoder(Message_Spreader(binaire_to_ternaire(text_to_bits(txt))),key)) 
+
+def Back_to_text(received):
+    Ternaire = [1 if x==-1 else 0 for x in received]
+    print(Ternaire)
+    return(text_to_bits(Ternaire))
+
+def Decoder_1(Traffic,key):
     Decoded = []
     Received = []
     for i in range(0, len(Traffic), 8):
@@ -174,19 +150,19 @@ def DecoderTest1(Traffic,key):
   
     return Received
 
-def DecoderTest2(Traffic,diff):
+def Decoder_2(Traffic,diff):
     if diff >0:
         #Si le 1er est le plus long
-        Received_1=DecoderTest1(Traffic,Key_1)
+        Received_1=Decoder_1(Traffic,Key_1)
         del Traffic[-diff]
-        Received_2=DecoderTest1(Traffic,Key_2)
+        Received_2=Decoder_1(Traffic,Key_2)
     elif diff <0:
-        Received_2=DecoderTest1(Traffic,Key_2)
+        Received_2=Decoder_1(Traffic,Key_2)
         del Traffic[diff]
-        Received_1=DecoderTest1(Traffic,Key_1)
+        Received_1=Decoder_1(Traffic,Key_1)
     else :
-        Received_1=DecoderTest1(Traffic,Key_1)
-        Received_2=DecoderTest1(Traffic,Key_2)
+        Received_1=Decoder_1(Traffic,Key_1)
+        Received_2=Decoder_1(Traffic,Key_2)
     return Received_1,Received_2
 
 

@@ -63,6 +63,7 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
     print('Message 2: '+msg_2)
     #Cas 1 user
     if nombre_users =='1':
+        print(cdma.text_to_bits(msg_1))
         Encoded_Volt = cdma.User_sending(msg_1,cdma.Key_1)
         if (bruit == 1):
             Traffic = cdma.Multiplexing_2 (Encoded_Volt ,cdma.Noise_Generator(len(Encoded_Volt)))
@@ -82,7 +83,7 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         Reception=cdma.Decoder_1(Traffic,cdma.Key_1)
         print(Reception)
         #Back to Text 
-        cdma.Back_to_text(Reception)
+        print (cdma.Back_to_text(Reception))
 
     elif nombre_users== '2':
         Reception_1,Reception_2=cdma.Decoder_2(Traffic,diff)

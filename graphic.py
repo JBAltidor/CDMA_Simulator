@@ -55,39 +55,39 @@ class StationeryFunctions:
         return
 
 
-
-win = tk.Tk()
-win.title("CDMA Simulator")
-# win.resizable(0,0)
-
-
-# drop down menu
-ttk.Label(win, text="Select number of users:").grid(column=0, row=0)
-number = tk.StringVar()
-numberChosen = ttk.Combobox(win, width=12, textvariable=number)
-numberChosen['values'] = (1, 2)
-numberChosen.grid(column=0, row=1)
-numberChosen.current(1)
+def Start ():
+    win = tk.Tk()
+    win.title("CDMA Simulator")
+    # win.resizable(0,0)
 
 
-# checkbutton 2 (unchecked)
-chVarUn = tk.IntVar()
-bruit_checkbox = tk.Checkbutton(win, text="Noise", onvalue = 1, offvalue = 0, variable=chVarUn)
-bruit_checkbox.toggle()
-bruit_checkbox.grid(column=0, row=2, sticky=tk.W, columnspan=3)
+    # drop down menu
+    ttk.Label(win, text="Select number of users:").grid(column=0, row=0)
+    number = tk.StringVar()
+    numberChosen = ttk.Combobox(win, width=12, textvariable=number)
+    numberChosen['values'] = (1, 2)
+    numberChosen.grid(column=0, row=1)
+    numberChosen.current(1)
 
 
-# scrolled text
-ttk.Label(win, text="Message 1:").grid(column=0, row=3)
-msg_1 = scrolledtext.ScrolledText(win, width=30, height=3, wrap=tk.WORD)
-msg_1.grid(column=0, row=4, sticky='WE', columnspan=3)
+    # checkbutton 2 (unchecked)
+    chVarUn = tk.IntVar()
+    bruit_checkbox = tk.Checkbutton(win, text="Noise", onvalue = 1, offvalue = 0, variable=chVarUn)
+    bruit_checkbox.toggle()
+    bruit_checkbox.grid(column=0, row=2, sticky=tk.W, columnspan=3)
 
-# scrolled text
-ttk.Label(win, text="Message 2:").grid(column=0, row=5)
-msg_2 = scrolledtext.ScrolledText(win, width=30, height=3, wrap=tk.WORD)
-msg_2.grid(column=0, row=6, sticky='WE', columnspan=3)
-if(numberChosen.get() == 1):
-    msg_2.configure(state="disabled")
+
+    # scrolled text
+    ttk.Label(win, text="Message 1:").grid(column=0, row=3)
+    msg_1 = scrolledtext.ScrolledText(win, width=30, height=3, wrap=tk.WORD)
+    msg_1.grid(column=0, row=4, sticky='WE', columnspan=3)
+
+    # scrolled text
+    ttk.Label(win, text="Message 2:").grid(column=0, row=5)
+    msg_2 = scrolledtext.ScrolledText(win, width=30, height=3, wrap=tk.WORD)
+    msg_2.grid(column=0, row=6, sticky='WE', columnspan=3)
+    if(numberChosen.get() == 1):
+        msg_2.configure(state="disabled")
 
 
 # button click event + name.get()
@@ -139,12 +139,12 @@ action.grid(column=2, row=7)
 
 win.mainloop()
 
-root = tk.Tk()
-pad = tk.Text(root,wrap='none')
-pad.storeobj = {}
-StationeryFunctions(pad)
-pad.pack()
-root.mainloop()
+# root = tk.Tk()
+# pad = tk.Text(root,wrap='none')
+# pad.storeobj = {}
+# StationeryFunctions(pad)
+# pad.pack()
+# root.mainloop()
 
 
 # Je trouve vraiment ca ridicule de mettre ces etapes, cuz 

@@ -82,18 +82,15 @@ def Decoder(Traffic , key):
         temp= Traffic[i:i + 8]
         result = np.inner(temp,key)
         Decoded.append(result/8)  
-        # for i in range (len(Decoded)):
-        #     x=math.ceil(i)
-        #     if (x>1):
-        #         x=1
-        #     elif x<-1:
-        #         x=-1
-        # Received.append(x)
-        # print (Received)
-
-        print(Decoded)
-
-    Received =[round(x) for x in Decoded]
+    for x in range (len(Decoded)):
+            if (Decoded[x]>0):
+                i=1
+            elif (Decoded[x]<0):
+                i=-1
+            else :
+                i=random.randint(-1,1)
+            Received.append(i)
+  
     return Received
 
 def BER (Input , Output):
@@ -122,10 +119,9 @@ def binaire_to_ternaire(binaire):
     Ternaire = [-1 if x==0 else 1 for x in temp]    
     return Ternaire
 
-def pop_zeros(items):
-    #Permet de retirer les zeros ajoutes comme padding
-    while items[-1] == 0:
-        items.pop()
+def pop_padding(items,longeur):
+    #Permet de retirer le padding ajoute 
+    del items[-longeur]
     return items
 
 def ternaire_to_binaire (ternaire):
@@ -142,12 +138,12 @@ def padding (message1,message2):
     difference = len(message1) - len(message2)
     if difference > 0 :
         for i in range (difference):
-            message2.append(0)
+            message2.append(random.randint(-1,1))
     elif difference < 0:
         for i in range (-difference):
-            message1.append(0)
+            message1.append(random.randint(-1,1))
 
-    return message1,message2
+    return message1,message2,difference
 
 
 #--------------------------------------------------------------------------------------------

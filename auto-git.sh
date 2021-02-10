@@ -12,7 +12,7 @@ do
         echo "This is the current Repo Status"
         git status
         git add .;
-        git commit -m "This commit is made by Auto-Git $n, $time"
+        git commit -m " Auto-Push $n, $time"
         git push
         echo "Commit $n Made"
         n=$(($n + 1));

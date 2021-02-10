@@ -2,9 +2,6 @@
 test =[1,2,3,34,6,7]
 test2=[2,3]
 test3 = [3,5,6,7]
-su = []
-for i in range (max (len(test),len(test2),len (test3))):
-    su.append(test[i]+test2[i])
 
 def AddVector(a ,b ):
     added = []
@@ -13,7 +10,8 @@ def AddVector(a ,b ):
     if (len(a)>len(b)):
         added.append(a[i:])
     elif (len(b)>len(a)):
-        
+         added.append(b[i:])
+    return added
 
 
-print(su)
+print(AddVector(test,test2))

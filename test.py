@@ -8,9 +8,9 @@ def AddVector(a ,b ):
     for i in range (min (len(a),len(b))):
         added.append(a[i]+b[i])
     if (len(a)>len(b)):
-        added.append(a[i:])
+        added.append(a[i+1:])
     elif (len(b)>len(a)):
-         added.append(b[i:])
+         added.append(b[i+1:])
     return added
 
 

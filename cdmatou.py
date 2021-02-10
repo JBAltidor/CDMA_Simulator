@@ -64,14 +64,12 @@ def Noise_Generator(size):
 def Multiplexing (User_1 , User_2 , Noise):
     #Melange les signaux pour la transmission
     Traffic = []
-    for i in range (0,len(User_1)):
-        Traffic.append(User_1[i] + User_2[i] + Noise[i])
+    AddVector(AddVector(User_1, User_2),Noise)
     return Traffic
 
 def Multiplexing_2 (User_1 , Noise):
     Traffic = []
-    for i in range (0,len(User_1)):
-        Traffic.append(User_1[i] +  Noise[i])
+    Traffic = AddVector(User_1,Noise)
     return Traffic
 
 

@@ -7,6 +7,11 @@ for i in range (max (len(test),len(test2),len (test3))):
     su.append(test[i]+test2[i])
 
 def AddVector(a ,b ):
-    
+    added = []
+    for i in range (min (len(a),len(b))):
+        added.append(a[i]+b[i])
+    if (len(a)>len(b)):
+        added.append()
+
 
 print(su)

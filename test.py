@@ -15,4 +15,5 @@ def AddVector(a, b):
     return added
 
 
-print(AddVector(AddVector(test, test2),test3))
+result = AddVector(AddVector(test, test2),test3)
+print (result[:len(test2)])

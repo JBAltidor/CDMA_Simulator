@@ -72,6 +72,9 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
     elif (nombre_users == '2'): 
         Encoded_Volt_1 = cdma.User_sending(msg_1,cdma.Key_1)
         Encoded_Volt_2 = cdma.User_sending(msg_2,cdma.Key_2 )
+        #test
+        long1,long2=len(Encoded_Volt_1),len(Encoded_Volt_2)
+        #
         diff =len(Encoded_Volt_1) - len(Encoded_Volt_2)
         if (bruit == 1):
             Traffic = cdma.Multiplexing(Encoded_Volt_1,Encoded_Volt_2,cdma.Noise_Generator(max(len(Encoded_Volt_1),len(Encoded_Volt_2))))

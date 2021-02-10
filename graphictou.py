@@ -95,6 +95,8 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         print("Reception 1")
         print (len(Reception_1))
         print(long1)
+        print (len (Traffic))
+        print("==============")
         # print (Reception_1)
         # print(cdma.Back_to_text(Reception_1[:long1]))
         print("Reception 2")

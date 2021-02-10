@@ -11,7 +11,9 @@ def AddVector(a ,b ):
     for i in range (min (len(a),len(b))):
         added.append(a[i]+b[i])
     if (len(a)>len(b)):
-        added.append()
+        added.append(a[i:])
+    elif (len(b)>len(a)):
+        
 
 
 print(su)

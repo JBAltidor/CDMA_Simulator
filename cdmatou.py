@@ -122,6 +122,7 @@ def ternaire_to_binaire (ternaire):
 
 #__________________________________________________________________________________________________#
 
+
 def User_sending (txt,key):    
     return Volt_Encoder(Message_Encoder(Message_Spreader(binaire_to_ternaire(text_to_bits(txt))),key)) 
 

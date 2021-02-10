@@ -82,7 +82,7 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
     #reception
     if nombre_users== '1':
         Reception=cdma.Decoder_1(Traffic,cdma.Key_1)
-        print(Reception)
+        print("Reception")
         #Back to Text 
         print (cdma.Back_to_text(Reception))
 

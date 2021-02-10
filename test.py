@@ -3,7 +3,7 @@ test = [1, 2, 3, 34, 6, 7]
 test2 = [2, 3]
 test3 = [3, 5, 6, 7]
 
-
+result = []
 def AddVector(a, b):
     added = []
     for i in range(min(len(a), len(b))):

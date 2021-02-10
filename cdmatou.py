@@ -130,7 +130,7 @@ def Back_to_text(received):
     temp2 = [str(i) for i in temp1]
     ternaire = ''
     ternaire = ternaire.join(temp2)
-    print (ternaire)
+    # print (ternaire)
     return(text_from_bits(ternaire))
 
 def Decoder_1(Traffic,key):

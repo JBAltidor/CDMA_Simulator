@@ -61,6 +61,7 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
 
     print('Message 1: '+msg_1)
     print('Message 2: '+msg_2)
+    
     #Cas 1 user
     if nombre_users =='1':
         print(cdma.text_to_bits(msg_1))

@@ -151,21 +151,6 @@ def Decoder_1(Traffic,key):
   
     return Received
 
-def Decoder_2(Traffic,diff):
-    # if diff >0:
-    #     #Si le 1er est le plus long
-    #     Received_1=Decoder_1(Traffic,Key_1)
-    #     del Traffic[-diff]
-    #     Received_2=Decoder_1(Traffic,Key_2)
-    # elif diff <0:
-    #     Received_2=Decoder_1(Traffic,Key_2)
-    #     del Traffic[diff]
-    #     Received_1=Decoder_1(Traffic,Key_1)
-    # else :
-        Received_1=Decoder_1(Traffic,Key_1)
-        Received_2=Decoder_1(Traffic,Key_2)
-        return Received_1,Received_2
-
 def AddVector(a, b):
     added = []
     for i in range(min(len(a), len(b))):

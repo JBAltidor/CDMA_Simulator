@@ -5,5 +5,6 @@ add variable noise level
 remove 0 as padding replace with random shit (random.randint(0,1) (done)
 send a tuple containing the length of each message so we can use binary instead of ternary (done)
 enable copy/pasting : https://www.bitforestinfo.com/blog/05/14/how-to-add-copycutpaste-feature-inin-python-python-magicstick.html (done)
-
+\-Fix error with 2 users + noise
+Add message when somethings goes wrong exemple :empty message as input )
 

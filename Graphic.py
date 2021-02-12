@@ -100,6 +100,7 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         print (Encoded_Volt_1)
         print (vo)
         print (Reception_1)
+        print (Reception_2)
   
    
 

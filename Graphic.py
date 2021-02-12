@@ -97,17 +97,7 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         print("==============")
         print("Reception 2")
         print(cdma.Back_to_text(Reception_2))
-        #Back to text 
-        # print (Encoded_Volt_1)
-        # # print (vo)
-        # print (Reception_1)
-        # print (Reception_2)
-  
-   
-
-
-
-
+ 
 if __name__ == '__main__':
     Start() 
     win.mainloop()

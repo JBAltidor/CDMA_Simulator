@@ -98,7 +98,7 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         # print(cdma.Back_to_text(Reception_2))
         #Back to text 
         print (Encoded_Volt_1)
-        print (vo)
+        # print (vo)
         print (Reception_1)
         print (Reception_2)
   

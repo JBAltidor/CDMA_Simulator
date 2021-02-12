@@ -64,13 +64,14 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
 
     #Cas 1 user
     if nombre_users =='1':
-        input_1 = binaire_to_ternaire(text_to_bits(txt)
+        input_1 = binaire_to_ternaire(text_to_bits(msg_1))
         Encoded_Volt = cdma.User_sending(msg_1,cdma.Key_1)
         if (bruit == 1):
             Traffic = cdma.Multiplexing(Encoded_Volt ,cdma.Noise_Generator(len(Encoded_Volt)))
         else : Traffic = Encoded_Volt
     #Cas 2 users
     elif (nombre_users == '2'): 
+
         Encoded_Volt_1 = cdma.User_sending(msg_1,cdma.Key_1)
         Encoded_Volt_2 = cdma.User_sending(msg_2,cdma.Key_2 )
         #saving the lengths

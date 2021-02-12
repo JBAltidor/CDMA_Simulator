@@ -101,10 +101,7 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         try :
             print(cdma.Back_to_text(Reception_1))
         except:
-            print ("Erreur dans la reconversion en ASCII")
-        print("Longueurs")
-        print(len (input_2_1))
-        print(len(Reception_1))
+            print ("Erreurs dans la reconversion en ASCII")
        
         cdma.BER(input_2_1,Reception_1)
         print("==============")
@@ -113,10 +110,6 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
             print(cdma.Back_to_text(Reception_2))
         except:
             print ("Erreur dans la reconversion en ASCII")
-        print("Longueurs")
-        print(len (input_2_2))
-        print(len(Reception_2))
-        cdma.BER(input_2_2,Reception_2)
  
 if __name__ == '__main__':
     Start() 

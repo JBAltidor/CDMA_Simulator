@@ -11,3 +11,5 @@ enable copy/pasting : https://www.bitforestinfo.com/blog/05/14/how-to-add-copycu
 Fix error with 2 users + noise (done)
 Add error message when ascii conversion fails (done)
 
+#Important 
+voltage range is set to [0,1] and [0,-1] and noise level to 0.8 . so lot of errors 

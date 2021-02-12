@@ -91,7 +91,11 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         Reception=cdma.Decoder_1(Traffic,cdma.Key_1)
         print("Reception")
         #Back to Text 
-        print (cdma.Back_to_text(Reception))
+        try :
+            print (cdma.Back_to_text(Reception))
+        except:
+            print ("Erreurs dans la reconversion en ASCII")
+        
         cdma.BER(input_1,Reception)
 
     elif nombre_users== '2':

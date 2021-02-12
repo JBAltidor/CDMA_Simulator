@@ -104,6 +104,8 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         print("Reception 2")
         print(cdma.Back_to_text(Reception_2))
         cdma.BER(input_2_1,Reception_2)
+        print(input_2_2)
+        print(Reception_2)
  
 if __name__ == '__main__':
     Start() 

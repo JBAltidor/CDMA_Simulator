@@ -65,7 +65,7 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
     #Cas 1 user
     if nombre_users =='1':
         #saving input as bits for BER analysis 
-        input_1 = cdma.binaire_to_ternaire(text_to_bits(msg_1))
+        input_1 = cdma.binaire_to_ternaire(cdma.text_to_bits(msg_1))
 
         Encoded_Volt = cdma.User_sending(msg_1,cdma.Key_1)
         if (bruit == 1):
@@ -74,8 +74,8 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
     #Cas 2 users
     elif (nombre_users == '2'): 
         #saving input as bits for BER analysis 
-        input_2_1 = cdma.binaire_to_ternaire(text_to_bits(msg_1))
-        input_2_2 = cdma.binaire_to_ternaire(text_to_bits(msg_2))
+        input_2_1 = cdma.binaire_to_ternaire(cdma.text_to_bits(msg_1))
+        input_2_2 = cdma.binaire_to_ternaire(cdma.text_to_bits(msg_2))
      
         Encoded_Volt_1 = cdma.User_sending(msg_1,cdma.Key_1)
         Encoded_Volt_2 = cdma.User_sending(msg_2,cdma.Key_2 )

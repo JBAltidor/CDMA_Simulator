@@ -47,7 +47,7 @@ def Volt_Encoder(Encoded):
     #Permet de faire le mapping entre une valeur binaire et une plage de volt
     Volt_Encoded = []
     for i in range (len(Encoded)):
-        volt = random.uniform(0.5,1.5)
+        volt = random.uniform(0.2,1.5)#(0.5,1.5)
         if Encoded[i]==1:
             volt = -volt
         Volt_Encoded.append(volt)

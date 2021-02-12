@@ -74,8 +74,8 @@ def BER (Input , Output):
     for i in range (0,len(Input)):
         if Input[i] != Output[i]:
             error  += 1
-    print ("BER is %")
-    return error/len(Input)
+    print ("BER is %.4f %" %error/len(Input)*100)
+    # return error/len(Input)
 
 #--------------------------------------------------------------------------------------#
 

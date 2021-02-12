@@ -29,14 +29,29 @@ def Start ():
     number = tk.StringVar()
     numberChosen = ttk.Combobox(win, width=12, textvariable=number)
     numberChosen['values'] = (1, 2)
-    numberChosen.grid(column=0, row=1)
     numberChosen.current(1)
+    numberChosen.grid(column=0, row=1)
+    
+    # numberChosen.current(1)
     # checkbutton 2 (unchecked)
-    chVarUn = tk.IntVar()
-    bruit_checkbox = tk.Checkbutton(win, text="Bruit", onvalue = 1, offvalue = 0, variable=chVarUn)
-    bruit_checkbox.toggle()
-    bruit_checkbox.grid(column=0, row=2, sticky=tk.W, columnspan=3)
-     # scrolled text
+    # chVarUn = tk.IntVar()
+    # bruit_checkbox = tk.Checkbutton(win, text="Bruit", onvalue = 1, offvalue = 0, variable=chVarUn)
+    # bruit_checkbox.toggle()
+    # bruit_checkbox.grid(column=0, row=2, sticky=tk.W, columnspan=3)
+    #slider bruit
+    valuelist = [0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
+    def valuecheck(value):
+        newvalue = min(valuelist, key=lambda x:abs(x-float(value)))
+        # slider.set(newvalue)
+        # print(newvalue)
+        return newvalue
+    
+    
+    slider = ttk.Scale(win, from_=0, to=1, command=valuecheck, orient="horizontal")
+    slider.set(0)
+    slider.grid(column=1, row=2, sticky=tk.W, columnspan=3)
+    # print(slider.get())
+    # scrolled text
     ttk.Label(win, text="Message 1:").grid(column=0, row=3)
     msg_1 = scrolledtext.ScrolledText(win, width=30, height=3, wrap=tk.WORD)
     msg_1.grid(column=0, row=4, sticky='WE', columnspan=3)
@@ -47,7 +62,7 @@ def Start ():
     if(numberChosen.get() == 1):
         msg_2.configure(state="disabled")
         # button
-    action = ttk.Button(win, text="Start", command= lambda: Start_simulation(numberChosen.get(), chVarUn.get(), msg_1.get('1.0', 'end-1c'), msg_2.get('1.0', 'end-1c')))
+    action = ttk.Button(win, text="Start", command= lambda: Start_simulation(numberChosen.get(), slider.get(), msg_1.get('1.0', 'end-1c'), msg_2.get('1.0', 'end-1c')))
     action.grid(column=2, row=7)
     
     
@@ -56,8 +71,8 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
     # action.configure(text='Start')
     print('=========== Start simulation ===========')
     print('Nombre d utilisateurs: '+nombre_users)
-    nois = 'Oui' if bruit == 1 else 'Non'
-    print('Bruit: '+str(nois))
+    # nois = 'Oui' if bruit == 1 else 'Non'
+    print('Bruit: '+str(bruit))
 
     # print('Message 1: '+msg_1)
     # print('Message 2: '+msg_2)
@@ -68,8 +83,8 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         input_1 = cdma.binaire_to_ternaire(cdma.text_to_bits(msg_1))
 
         Encoded_Volt = cdma.User_sending(msg_1,cdma.Key_1)
-        if (bruit == 1):
-            Traffic = cdma.Multiplexing(Encoded_Volt ,cdma.Noise_Generator(len(Encoded_Volt)))
+        if (bruit > 0):
+            Traffic = cdma.Multiplexing(Encoded_Volt ,cdma.Noise_Generator(len(Encoded_Volt),bruit ))
         else : Traffic = Encoded_Volt
     #Cas 2 users
     elif (nombre_users == '2'): 
@@ -81,8 +96,8 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         Encoded_Volt_2 = cdma.User_sending(msg_2,cdma.Key_2 )
         #saving the lengths
         long1,long2=len(Encoded_Volt_1),len(Encoded_Volt_2)
-        if (bruit == 1):
-            Traffic = cdma.Multiplexing(cdma.Multiplexing(Encoded_Volt_1,Encoded_Volt_2),cdma.Noise_Generator(max(len(Encoded_Volt_1),len(Encoded_Volt_2))))
+        if (bruit > 0):
+            Traffic = cdma.Multiplexing(cdma.Multiplexing(Encoded_Volt_1,Encoded_Volt_2),cdma.Noise_Generator(max(len(Encoded_Volt_1),len(Encoded_Volt_2)),bruit))
         else : Traffic = cdma.Multiplexing(Encoded_Volt_1,Encoded_Volt_2)
   
 

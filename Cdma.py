@@ -13,7 +13,11 @@ Walsh = np.array([[1,  1,  1,  1,  1,  1,  1,  1],
     [1,  1, -1, -1, -1, -1,  1,  1],
     [1, -1, -1,  1, -1,  1,  1, -1]])
 
+<<<<<<< HEAD
 B = 0.0
+=======
+B = 0.2
+>>>>>>> 288a99419e929d1852eb885c2399d3c34c3648a2
 Key_1=Walsh[1]
 Key_2=Walsh[2]
 
@@ -54,11 +58,11 @@ def Volt_Encoder(Encoded):
     return Volt_Encoded
         
 
-def Noise_Generator(size):
+def Noise_Generator(size, niveau_bruit):
     #Genere un bruit aleatoire de la meme longueur que le message
     Noise = []
     for i in range (0,size):
-        Noise.append(B*random.uniform(-1,1))
+        Noise.append(niveau_bruit*random.uniform(-1,1))
     return Noise
 
 def Multiplexing (User_1 , Noise):

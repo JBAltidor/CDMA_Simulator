@@ -77,7 +77,8 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         long1,long2=len(Encoded_Volt_1),len(Encoded_Volt_2)
         if (bruit == 1):
             vo = cdma.Noise_Generator(max(len(Encoded_Volt_1),len(Encoded_Volt_2)))
-            Traffic = cdma.Multiplexing(Encoded_Volt_1,Encoded_Volt_2,vo)
+            # Traffic = cdma.Multiplexing(Encoded_Volt_1,Encoded_Volt_2,vo)
+            Traffic = cdma.Multiplexing_2(cdma.Multiplexing_2(Encoded_Volt_1,Encoded_Volt_2),vo)
         else : Traffic = cdma.Multiplexing_2(Encoded_Volt_1,Encoded_Volt_2)
   
 
@@ -92,15 +93,15 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         Reception_1 = cdma.Decoder_1(Traffic[:long1],cdma.Key_1)
         Reception_2 = cdma.Decoder_1(Traffic[:long2],cdma.Key_2)
         print("Reception 1")
-        # print(cdma.Back_to_text(Reception_1))
+        print(cdma.Back_to_text(Reception_1))
         print("==============")
         print("Reception 2")
-        # print(cdma.Back_to_text(Reception_2))
+        print(cdma.Back_to_text(Reception_2))
         #Back to text 
-        print (Encoded_Volt_1)
-        # print (vo)
-        print (Reception_1)
-        print (Reception_2)
+        # print (Encoded_Volt_1)
+        # # print (vo)
+        # print (Reception_1)
+        # print (Reception_2)
   
    
 

@@ -59,8 +59,8 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
     nois = 'Oui' if bruit == 1 else 'Non'
     print('Bruit: '+str(nois))
 
-    print('Message 1: '+msg_1)
-    print('Message 2: '+msg_2)
+    # print('Message 1: '+msg_1)
+    # print('Message 2: '+msg_2)
 
     #Cas 1 user
     if nombre_users =='1':

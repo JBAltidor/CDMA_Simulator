@@ -7,4 +7,5 @@ send a tuple containing the length of each message so we can use binary instead 
 enable copy/pasting : https://www.bitforestinfo.com/blog/05/14/how-to-add-copycutpaste-feature-inin-python-python-magicstick.html (done)
 Fix error with 2 users + noise (done)
 Add message when somethings goes wrong exemple :empty message as input )
+Add error message when ascii conversion fails (done)
 

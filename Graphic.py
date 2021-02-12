@@ -99,7 +99,9 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         Reception_2 = cdma.Decoder_1(Traffic[:long2],cdma.Key_2)
         print("Reception 1")
         print(cdma.Back_to_text(Reception_1))
-        print (len (input_2_1))
+        print("Longueurs")
+        print(len (input_2_1))
+        print(len(Reception_1))
        
         # cdma.BER(input_2_1,Reception_1)
         print("==============")

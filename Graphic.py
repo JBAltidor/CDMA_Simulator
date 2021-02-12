@@ -98,7 +98,10 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         Reception_1 = cdma.Decoder_1(Traffic[:long1],cdma.Key_1)
         Reception_2 = cdma.Decoder_1(Traffic[:long2],cdma.Key_2)
         print("Reception 1")
-        print(cdma.Back_to_text(Reception_1))
+        try :
+            print(cdma.Back_to_text(Reception_1))
+        except:
+            print ("Erreur dans la reconversion en ASCII")
         print("Longueurs")
         print(len (input_2_1))
         print(len(Reception_1))
@@ -106,7 +109,10 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         cdma.BER(input_2_1,Reception_1)
         print("==============")
         print("Reception 2")
-        print(cdma.Back_to_text(Reception_2))
+        try :
+            print(cdma.Back_to_text(Reception_2))
+        except:
+            print ("Erreur dans la reconversion en ASCII")
         print("Longueurs")
         print(len (input_2_2))
         print(len(Reception_2))

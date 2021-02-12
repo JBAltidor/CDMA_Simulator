@@ -74,6 +74,7 @@ def BER (Input , Output):
     for i in range (0,len(Input)):
         if Input[i] != Output[i]:
             error  += 1
+    print ("BER is %")
     return error/len(Input)
 
 #--------------------------------------------------------------------------------------#

@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import scrolledtext
-import cdmatou as cdma
+import Cdma as cdma
 
 win = tk.Tk()
 def make_menu(w):

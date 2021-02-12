@@ -71,7 +71,7 @@ def Multiplexing (User_1 , Noise):
 def BER (Input , Output):
     #Calcule le Bit Error Rate
     error = 0
-    for i in range (0,len(Input)):
+    for i in range (0,len(min (Input,Output))):
         if Input[i] != Output[i]:
             error  += 1
     result = error/len(Input)*100

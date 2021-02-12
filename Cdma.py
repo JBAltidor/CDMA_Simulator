@@ -61,13 +61,7 @@ def Noise_Generator(size):
         Noise.append(B*random.uniform(-1,1))
     return Noise
 
-def Multiplexing (User_1 , User_2 , Noise):
-    #Melange les signaux pour la transmission
-    Traffic = []
-    AddVector(AddVector(User_1, User_2),Noise)
-    return Traffic
-
-def Multiplexing_2 (User_1 , Noise):
+def Multiplexing (User_1 , Noise):
     Traffic = []
     Traffic = AddVector(User_1,Noise)
     return Traffic

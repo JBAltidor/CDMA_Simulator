@@ -103,14 +103,14 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         print(len (input_2_1))
         print(len(Reception_1))
        
-        # cdma.BER(input_2_1,Reception_1)
+        cdma.BER(input_2_1,Reception_1)
         print("==============")
         print("Reception 2")
         print(cdma.Back_to_text(Reception_2))
         print("Longueurs")
         print(len (input_2_2))
         print(len(Reception_2))
-        # cdma.BER(input_2_1,Reception_2)
+        cdma.BER(input_2_1,Reception_2)
  
 if __name__ == '__main__':
     Start() 

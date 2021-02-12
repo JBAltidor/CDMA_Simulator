@@ -43,7 +43,7 @@ def Start ():
     # scrolled text
     ttk.Label(win, text="Message 2:").grid(column=0, row=5)
     msg_2 = scrolledtext.ScrolledText(win, width=30, height=3, wrap=tk.WORD)
-    msg_2.grid(column=0, row=6, sticky='WE', columnspan=3)
+    msg_2.grid(column=0, row=6, sticky='WE', columnspan=3 )
     if(numberChosen.get() == 1):
         msg_2.configure(state="disabled")
         # button

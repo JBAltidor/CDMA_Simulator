@@ -61,7 +61,8 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
 
     print('Message 1: '+msg_1)
     print('Message 2: '+msg_2)
-
+        #noise test 
+        
     #Cas 1 user
     if nombre_users =='1':
         Encoded_Volt = cdma.User_sending(msg_1,cdma.Key_1)

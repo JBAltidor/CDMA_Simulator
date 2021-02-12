@@ -66,6 +66,7 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
     if nombre_users =='1':
         #saving input as bits for BER analysis 
         input_1 = binaire_to_ternaire(text_to_bits(msg_1))
+        
         Encoded_Volt = cdma.User_sending(msg_1,cdma.Key_1)
         if (bruit == 1):
             Traffic = cdma.Multiplexing(Encoded_Volt ,cdma.Noise_Generator(len(Encoded_Volt)))

@@ -39,12 +39,12 @@ def Start ():
     # bruit_checkbox.toggle()
     # bruit_checkbox.grid(column=0, row=2, sticky=tk.W, columnspan=3)
     #slider bruit
-    valuelist = [0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
-    def valuecheck(value):
-        newvalue = min(valuelist, key=lambda x:abs(x-float(value)))
-        # slider.set(newvalue)
-        # print(newvalue)
-        return newvalue
+    # valuelist = [0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
+    # def valuecheck(value):
+    #     newvalue = min(valuelist, key=lambda x:abs(x-float(value)))
+    #     # slider.set(newvalue)
+    #     # print(newvalue)
+    #     return newvalue
     
     
     slider = tk.Scale(win, from_=0, to=100,tickinterval=10,length =400, command=valuecheck, orient="horizontal")

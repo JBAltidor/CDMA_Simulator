@@ -52,13 +52,13 @@ def Start ():
     slider.grid(column=0, row=3, sticky=tk.W, columnspan=2)
     # print(slider.get())
     # scrolled text
-    ttk.Label(win, text="Message 1:").grid(column=0, row=3)
+    ttk.Label(win, text="Message 1:").grid(column=0, row=4)
     msg_1 = scrolledtext.ScrolledText(win, width=30, height=3, wrap=tk.WORD)
-    msg_1.grid(column=0, row=4, sticky='WE', columnspan=3)
+    msg_1.grid(column=0, row=5, sticky='WE', columnspan=3)
     # scrolled text
-    ttk.Label(win, text="Message 2:").grid(column=0, row=5)
+    ttk.Label(win, text="Message 2:").grid(column=0, row=6)
     msg_2 = scrolledtext.ScrolledText(win, width=30, height=3, wrap=tk.WORD)
-    msg_2.grid(column=0, row=6, sticky='WE', columnspan=3 )
+    msg_2.grid(column=0, row=7, sticky='WE', columnspan=3 )
     if(numberChosen.get() == 1):
         msg_2.configure(state="disabled")
         # button

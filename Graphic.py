@@ -49,14 +49,14 @@ def Start ():
     ttk.Label(win, text="Niveau de bruit").grid(column=0, row=2)
     slider = tk.Scale(win, from_=0, to=100,tickinterval=10,length =300, orient="horizontal")
     slider.set(0)
-    slider.grid(column=0, row=3, sticky=tk.W, columnspan=3)
+    slider.grid(column=0, row=2, sticky=tk.W, columnspan=3)
     # print(slider.get())
     # scrolled text
-    ttk.Label(win, text="Message 1:").grid(column=0, row=4)
+    ttk.Label(win, text="Message 1:").grid(column=0, row=3)
     msg_1 = scrolledtext.ScrolledText(win, width=30, height=3, wrap=tk.WORD)
     msg_1.grid(column=0, row=4, sticky='WE', columnspan=3)
     # scrolled text
-    ttk.Label(win, text="Message 2:").grid(column=0, row=6)
+    ttk.Label(win, text="Message 2:").grid(column=0, row=5)
     msg_2 = scrolledtext.ScrolledText(win, width=30, height=3, wrap=tk.WORD)
     msg_2.grid(column=0, row=6, sticky='WE', columnspan=3 )
     if(numberChosen.get() == 1):

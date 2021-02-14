@@ -63,7 +63,7 @@ def Start ():
         msg_2.configure(state="disabled")
         # button
     action = ttk.Button(win, text="Start", command= lambda: Start_simulation(numberChosen.get(), slider.get()/100, msg_1.get('1.0', 'end-1c'), msg_2.get('1.0', 'end-1c')))
-    action.grid(column=2, row=7)
+    action.grid(column=2, row=8)
     
     
 

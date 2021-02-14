@@ -47,7 +47,7 @@ def Start ():
     #     return newvalue
     
     
-    slider = tk.Scale(win, from_=0, to=100,tickinterval=10,length =400, command=valuecheck, orient="horizontal")
+    slider = tk.Scale(win, from_=0, to=100,tickinterval=10,length =400, orient="horizontal")
     slider.set(0)
     slider.grid(column=0, row=2, sticky=tk.W, columnspan=3)
     # print(slider.get())

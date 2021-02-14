@@ -46,8 +46,8 @@ def Start ():
     #     # print(newvalue)
     #     return newvalue
     
-    
-    slider = tk.Scale(win, from_=0, to=100,tickinterval=10,length =400, orient="horizontal")
+    ttk.Label(win, text="Niveau de bruit").grid(column=0, row=1)
+    slider = tk.Scale(win, from_=0, to=100,tickinterval=10,length =300, orient="horizontal")
     slider.set(0)
     slider.grid(column=0, row=2, sticky=tk.W, columnspan=3)
     # print(slider.get())

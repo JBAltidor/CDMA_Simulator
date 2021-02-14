@@ -49,7 +49,7 @@ def Start ():
     ttk.Label(win, text="Niveau de bruit").grid(column=0, row=2)
     slider = tk.Scale(win, from_=0, to=100,tickinterval=10,length =300, orient="horizontal")
     slider.set(0)
-    slider.grid(column=1, row=2, sticky=tk.W, columnspan=2)
+    slider.grid(column=0, row=3, sticky=tk.W, columnspan=2)
     # print(slider.get())
     # scrolled text
     ttk.Label(win, text="Message 1:").grid(column=0, row=3)

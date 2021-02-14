@@ -31,26 +31,13 @@ def Start ():
     numberChosen['values'] = (1, 2)
     numberChosen.current(1)
     numberChosen.grid(column=0, row=1)
-    
-    # numberChosen.current(1)
-    # checkbutton 2 (unchecked)
-    # chVarUn = tk.IntVar()
-    # bruit_checkbox = tk.Checkbutton(win, text="Bruit", onvalue = 1, offvalue = 0, variable=chVarUn)
-    # bruit_checkbox.toggle()
-    # bruit_checkbox.grid(column=0, row=2, sticky=tk.W, columnspan=3)
-    #slider bruit
-    # valuelist = [0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
-    # def valuecheck(value):
-    #     newvalue = min(valuelist, key=lambda x:abs(x-float(value)))
-    #     # slider.set(newvalue)
-    #     # print(newvalue)
-    #     return newvalue
-    
+
+    #Slider    
     ttk.Label(win, text="Niveau de bruit").grid(column=0, row=2)
     slider = tk.Scale(win, from_=0, to=100,tickinterval=10,length =300,width =10,orient="horizontal")
     slider.set(0)
     slider.grid(column=1, row=2, sticky=tk.W, columnspan=2)
-    # print(slider.get())
+    
     # scrolled text
     ttk.Label(win, text="Message 1:").grid(column=0, row=4)
     msg_1 = scrolledtext.ScrolledText(win, width=30, height=3, wrap=tk.WORD)

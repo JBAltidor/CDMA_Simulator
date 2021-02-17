@@ -119,7 +119,8 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         x1.append(len(input_2_1))
         y1.append(cdma.BER(input_2_1,Reception_1))
         print (x1)
-        print (y1)       
+        print (y1)     
+          
         # cdma.BER(input_2_1,Reception_1)
         print("==============")
         print("Reception 2")

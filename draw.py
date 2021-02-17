@@ -14,16 +14,16 @@ y = [2,4,1,5,2,6]
   
 # plotting the points  
 plt.plot(x, y, color='green', linestyle='dashed', linewidth = 3, 
-         marker='o', markerfacecolor='blue', markersize=12) 
+         marker='o', markerfacecolor='blue', markersize=6) 
   
 # setting x and y axis range 
 plt.ylim(1,8) 
 plt.xlim(1,8) 
   
 # naming the x axis 
-plt.xlabel('x - axis') 
+plt.xlabel('x - Nombre de bits envoyés') 
 # naming the y axis 
-plt.ylabel('y - axis') 
+plt.ylabel('y - Nombre de bits éronnés') 
   
 # giving a title to my graph 
 plt.title('Noise analysis') 

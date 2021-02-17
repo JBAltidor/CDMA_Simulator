@@ -35,7 +35,7 @@ def Start ():
     #Slider    
     ttk.Label(win, text="Niveau de bruit").grid(column=0, row=2)
     slider = tk.Scale(win, from_=0, to=100,tickinterval=10,length =300,width =10,orient="horizontal")
-    slider.set(0)
+    slider.set(200)
     slider.grid(column=1, row=2, sticky=tk.W, columnspan=2)
     
     # scrolled text
@@ -99,6 +99,8 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         #     print ("Erreurs dans la reconversion en ASCII")
         
         cdma.BER(input_1,Reception)
+        x=len(input_1)
+        y=cdma.BER(input_1,Reception)
 
     # elif nombre_users== '2':
     #     Reception_1 = cdma.Decoder_1(Traffic[:long1],cdma.Key_1)

@@ -56,10 +56,10 @@ def Start ():
 
 def Start_simulation(nombre_users, bruit, msg_1, msg_2):
     # action.configure(text='Start')
-    print('=========== Start simulation ===========')
-    print('Nombre d utilisateurs: '+nombre_users)
-    # nois = 'Oui' if bruit == 1 else 'Non'
-    print('Bruit: '+str(bruit))
+    # print('=========== Start simulation ===========')
+    # print('Nombre d utilisateurs: '+nombre_users)
+    # # nois = 'Oui' if bruit == 1 else 'Non'
+    # print('Bruit: '+str(bruit))
 
     # print('Message 1: '+msg_1)
     # print('Message 2: '+msg_2)
@@ -97,10 +97,11 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         #     print (cdma.Back_to_text(Reception))
         # except:
         #     print ("Erreurs dans la reconversion en ASCII")
-        
+        x = []
+        y = []
         cdma.BER(input_1,Reception)
-        x=len(input_1)
-        y=cdma.BER(input_1,Reception)
+        x.append(len(input_1))
+        y.append(cdma.BER(input_1,Reception))
         print (x)
         print (y)
 

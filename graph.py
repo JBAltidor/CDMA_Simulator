@@ -5,6 +5,12 @@ import Cdma as cdma
 x = []
 y = []
 
+x1 = []
+y1 = []
+
+x2 = []
+y2 = []
+
 win = tk.Tk()
 def make_menu(w):
     global the_menu

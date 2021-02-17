@@ -73,9 +73,9 @@ def BER (Input , Output):
     for i in range (0,len(Output)):
         if Input[i] != Output[i]:
             error  += 1
-    result = (error/len(Input))*100
+    # result = (error/len(Input))*100
     #print ("BER is {0:.2f} %" .format(result))
-    return result
+    return error
 
 #--------------------------------------------------------------------------------------#
 

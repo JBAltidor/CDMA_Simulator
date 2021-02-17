@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import scrolledtext
 import Cdma as cdma
+x = []
+y = []
 
 win = tk.Tk()
 def make_menu(w):
@@ -97,8 +99,7 @@ def Start_simulation(nombre_users, bruit, msg_1, msg_2):
         #     print (cdma.Back_to_text(Reception))
         # except:
         #     print ("Erreurs dans la reconversion en ASCII")
-        x = []
-        y = []
+       
         cdma.BER(input_1,Reception)
         x.append(len(input_1))
         y.append(cdma.BER(input_1,Reception))

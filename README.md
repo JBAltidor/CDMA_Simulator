@@ -6,3 +6,4 @@ L’objectif est d’en évaluer les performances en tenant compte:
 - et de la présence ou non de plusieurs utilisateurs simultanés sur le canal. 
 
 Documentation : https://docs.google.com/document/d/1AGKL_CRVn4gocdqthxebhg1T4qf6BZoqQDvAVV-crfk/edit?usp=sharing
+ Correction made 

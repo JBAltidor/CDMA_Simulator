@@ -17,6 +17,7 @@ plt.ylabel('y - Nombre de bits éronnés')
   
 # giving a title to my graph 
 plt.title('Noise analysis') 
+ert 
   
 # function to show the plot 
 plt.show() 

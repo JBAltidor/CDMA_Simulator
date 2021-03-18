@@ -73,8 +73,6 @@ def BER (Input , Output):
     for i in range (0,len(Output)):
         if Input[i] != Output[i]:
             error  += 1
-    # result = (error/len(Input))*100
-    #print ("BER is {0:.2f} %" .format(result))
     return error
 
 #--------------------------------------------------------------------------------------#
@@ -104,16 +102,6 @@ def ternaire_to_binaire (ternaire):
     ternaire = ''
     ternaire = ternaire.join(temp2)
     return ternaire
-
-
-
-#--------------------------------------------------------------------------------------------
-# def User_sending (txt,key):
-#     #conversion txt => volts
-#     return [i  for i in  Volt_Encoder(Message_Encoder(Message_Spreader(binaire_to_ternaire(text_to_bits(txt))),key))]
-
-# def User_receiving (traffic,key):
-#     return text_from_bits(ternaire_to_binaire(Decoder(traffic,key)))
 
 #__________________________________________________________________________________________________#
 

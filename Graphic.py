@@ -25,12 +25,21 @@ def Start ():
     make_menu(win)
     win.title("CDMA Simulator")
     # drop down menu
-    ttk.Label(win, text="Choisissez le nombre d'utilisateur:").grid(column=0, row=0)
+    ttk.Label(win, text="Nombre d'utilisateur:").grid(column=0, row=0)
     number = tk.StringVar()
     numberChosen = ttk.Combobox(win, width=12, textvariable=number) 
     numberChosen['values'] = (1, 2)
-    numberChosen.current(1)
+    numberChosen.set(1)
     numberChosen.grid(column=0, row=1)
+
+     # drop down menu
+    ttk.Label(win, text="Facteur d'étalement:").grid(column=1, row=0)
+    factor = tk.StringVar()
+    factorChosen = ttk.Combobox(win, width=12, textvariable=factor) 
+    factorChosen['values'] = (8, 16)
+    factorChosen.set(8)
+    factorChosen.grid(column=1, row=1)
+    
 
     #Slider    
     ttk.Label(win, text="Niveau de bruit").grid(column=0, row=2)
@@ -49,20 +58,19 @@ def Start ():
     if(numberChosen.get() == 1):
         msg_2.configure(state="disabled")
         # button
-    action = ttk.Button(win, text="Start", command= lambda: Start_simulation(numberChosen.get(), slider.get()/100, msg_1.get('1.0', 'end-1c'), msg_2.get('1.0', 'end-1c')))
+    action = ttk.Button(win, text="Start", command= lambda: Start_simulation(numberChosen.get(),factorChosen.get(), slider.get()/100, msg_1.get('1.0', 'end-1c'), msg_2.get('1.0', 'end-1c')))
     action.grid(column=2, row=8)
     
     
 
-def Start_simulation(nombre_users, bruit, msg_1, msg_2):
+def Start_simulation(nombre_users, factor, bruit, msg_1, msg_2):
     # action.configure(text='Start')
     print('=========== Start simulation ===========')
     print('Nombre d utilisateurs: '+nombre_users)
-    # nois = 'Oui' if bruit == 1 else 'Non'
+    print("Facteur d'etalement: "+factor)
     print('Bruit: '+str(bruit))
-
-    # print('Message 1: '+msg_1)
-    # print('Message 2: '+msg_2)
+    print(factor)
+    
 
     #Cas 1 user
     if nombre_users =='1':

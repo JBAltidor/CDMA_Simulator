@@ -1,5 +1,5 @@
 # CDMA_Simulator
-Ce programme simule, en partie, le principe qui se cache derrière la technique d'accès multiple  CDMA.  
+Ce programme simule, en partie, le principe qui se cache derrière la technique d'accès multiple  CDMA (Code Division Multiple Access).  
 L’objectif est d’en évaluer les performances en tenant compte:  
 - de la présence du bruit ou non sur le canal  
 - de la grandeur du facteur d’étalement  

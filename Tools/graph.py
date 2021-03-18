@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import scrolledtext
-import Cdma as cdma
+#import Cdma as cdma
 x = []
 y = []
 

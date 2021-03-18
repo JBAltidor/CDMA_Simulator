@@ -29,22 +29,24 @@ def Start ():
     number = tk.StringVar()
     numberChosen = ttk.Combobox(win, width=12, textvariable=number) 
     numberChosen['values'] = (1, 2)
-    numberChosen.set(1)
     numberChosen.grid(column=0, row=1)
+    numberChosen.current(0)
+    
 
      # drop down menu
     ttk.Label(win, text="Facteur d'étalement:").grid(column=1, row=0)
     factor = tk.StringVar()
     factorChosen = ttk.Combobox(win, width=12, textvariable=factor) 
     factorChosen['values'] = (8, 16)
-    factorChosen.set(8)
     factorChosen.grid(column=1, row=1)
+    factorChosen.current(0)
+    
     
 
     #Slider    
     ttk.Label(win, text="Niveau de bruit").grid(column=0, row=2)
     slider = tk.Scale(win, from_=0, to=100,tickinterval=10,length =300,width =10,orient="horizontal")
-    slider.set(0)
+    slider.set(20)
     slider.grid(column=1, row=2, sticky=tk.W, columnspan=2)
     
     # scrolled text
@@ -58,6 +60,7 @@ def Start ():
     if(numberChosen.get() == 1):
         msg_2.configure(state="disabled")
         # button
+    
     action = ttk.Button(win, text="Start", command= lambda: Start_simulation(numberChosen.get(),factorChosen.get(), slider.get()/100, msg_1.get('1.0', 'end-1c'), msg_2.get('1.0', 'end-1c')))
     action.grid(column=2, row=8)
     
@@ -68,16 +71,23 @@ def Start_simulation(nombre_users, factor, bruit, msg_1, msg_2):
     print('=========== Start simulation ===========')
     print('Nombre d utilisateurs: '+nombre_users)
     print("Facteur d'etalement: "+factor)
-    print('Bruit: '+str(bruit))
-    print(factor)
+    print('Bruit: '+str(bruit*100)+"%")
+    print()
+   
     
+    if (factor== '8'):
+        Cle_1=cdma.Key_1
+        Cle_2=cdma.Key_2
+    elif (factor == '16'):
+        Cle_1=cdma.Key_16_1
+        Cle_2=cdma.Key_16_2
 
     #Cas 1 user
     if nombre_users =='1':
         #saving input as bits for BER analysis 
         input_1 = cdma.binaire_to_ternaire(cdma.text_to_bits(msg_1))
 
-        Encoded_Volt = cdma.User_sending(msg_1,cdma.Key_1)
+        Encoded_Volt = cdma.User_sending(msg_1,Cle_1)
         if (bruit > 0):
             Traffic = cdma.Multiplexing(Encoded_Volt ,cdma.Noise_Generator(len(Encoded_Volt),bruit ))
         else : Traffic = Encoded_Volt
@@ -87,8 +97,8 @@ def Start_simulation(nombre_users, factor, bruit, msg_1, msg_2):
         input_2_1 = cdma.binaire_to_ternaire(cdma.text_to_bits(msg_1))
         input_2_2 = cdma.binaire_to_ternaire(cdma.text_to_bits(msg_2))
      
-        Encoded_Volt_1 = cdma.User_sending(msg_1,cdma.Key_1)
-        Encoded_Volt_2 = cdma.User_sending(msg_2,cdma.Key_2 )
+        Encoded_Volt_1 = cdma.User_sending(msg_1,Cle_1)
+        Encoded_Volt_2 = cdma.User_sending(msg_2,Cle_2 )
         #saving the lengths
         long1,long2=len(Encoded_Volt_1),len(Encoded_Volt_2)
         if (bruit > 0):
@@ -98,7 +108,7 @@ def Start_simulation(nombre_users, factor, bruit, msg_1, msg_2):
 
     #reception
     if nombre_users== '1':
-        Reception=cdma.Decoder_1(Traffic,cdma.Key_1)
+        Reception=cdma.Decoder_1(Traffic,Cle_1)
         print("Reception")
         #Back to Text 
         try :
@@ -109,8 +119,8 @@ def Start_simulation(nombre_users, factor, bruit, msg_1, msg_2):
         cdma.BER(input_1,Reception)
 
     elif nombre_users== '2':
-        Reception_1 = cdma.Decoder_1(Traffic[:long1],cdma.Key_1)
-        Reception_2 = cdma.Decoder_1(Traffic[:long2],cdma.Key_2)
+        Reception_1 = cdma.Decoder_1(Traffic[:long1],Cle_1)
+        Reception_2 = cdma.Decoder_1(Traffic[:long2],Cle_2)
         print("Reception 1")
         try :
             print(cdma.Back_to_text(Reception_1))

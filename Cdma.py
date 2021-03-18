@@ -13,16 +13,36 @@ Walsh = np.array([[1,  1,  1,  1,  1,  1,  1,  1],
     [1,  1, -1, -1, -1, -1,  1,  1],
     [1, -1, -1,  1, -1,  1,  1, -1]])
 
+Walsh_16=np.array([[1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1],
+   [1,  -1,   1,  -1,   1,  -1,   1,  -1,   1,  -1,   1,  -1,   1,  -1,   1,  -1],
+   [1,   1,  -1,  -1,   1,   1,  -1,  -1,   1,   1,  -1,  -1,   1,   1,  -1,  -1],
+   [1,  -1,  -1,   1,   1,  -1,  -1,   1,   1,  -1,  -1,   1,   1,  -1,  -1,   1],
+   [1,   1,   1,   1,  -1,  -1,  -1,  -1,   1,   1,   1,   1,  -1,  -1,  -1,  -1],
+   [1,  -1,   1,  -1,  -1,   1,  -1,   1,   1,  -1,   1,  -1,  -1,   1,  -1,   1],
+   [1,   1,  -1,  -1,  -1,  -1,   1,   1,   1,   1,  -1,  -1,  -1,  -1,   1,   1],
+   [1,  -1,  -1,   1,  -1,   1,   1,  -1,   1,  -1,  -1,   1,  -1,   1,   1,  -1],
+   [1,   1,   1,   1,   1,   1,   1,   1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1],
+   [1,  -1,   1,  -1,   1,  -1,   1,  -1,  -1,   1,  -1,   1,  -1,   1,  -1,   1],
+   [1,   1,  -1,  -1,   1,   1,  -1,  -1,  -1,  -1,   1,   1,  -1,  -1,   1,   1],
+   [1,  -1,  -1,   1,   1,  -1,  -1,   1,  -1,   1,   1,  -1,  -1,   1,   1,  -1],
+   [1,   1,   1,   1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,   1,   1,   1,   1],
+   [1,  -1,   1,  -1,  -1,   1,  -1,   1,  -1,   1,  -1,   1,   1,  -1,   1,  -1],
+   [1,   1,  -1,  -1,  -1,  -1,   1,   1,  -1,  -1,   1,   1,   1,   1,  -1,  -1],
+   [1,  -1 , -1,   1,  -1,   1,   1,  -1,  -1,   1,   1,  -1,   1,  -1,  -1,   1]])
+
 Key_1=Walsh[1]
 Key_2=Walsh[2]
 
+Key_16_1=Walsh_16[1]
+Key_16_2=Walsh_16[2]
+
 #------------------------------------------------------------------------------#
 
-def Message_Spreader(message):
+def Message_Spreader(message,size):
     #Etale le message sur longeur message * longueur code de Walsh
     Spreaded = []
     for i in range (len(message)):
-        for j in range (0,8):
+        for j in range (0,size):
             Spreaded.append(message[i])
     return Spreaded
 
@@ -107,7 +127,7 @@ def ternaire_to_binaire (ternaire):
 
 
 def User_sending (txt,key):    
-    return Volt_Encoder(Message_Encoder(Message_Spreader(binaire_to_ternaire(text_to_bits(txt))),key)) 
+    return Volt_Encoder(Message_Encoder(Message_Spreader(binaire_to_ternaire(text_to_bits(txt)),len(key)),key))
 
 def Back_to_text(received):
     temp1 = [0 if x==-1 else 1 for x in received]
@@ -119,10 +139,10 @@ def Back_to_text(received):
 def Decoder_1(Traffic,key):
     Decoded = []
     Received = []
-    for i in range(0, len(Traffic), 8):
-        temp= Traffic[i:i + 8]
+    for i in range(0, len(Traffic), len(key)):
+        temp= Traffic[i:i + len(key)]
         result = np.inner(temp,key)
-        Decoded.append(result/8)  
+        Decoded.append(result/len(key))  
     for x in range (len(Decoded)):
             if (Decoded[x]>0):
                 i=1

@@ -27,7 +27,7 @@ def Start ():
     # drop down menu
     ttk.Label(win, text="Nombre d'utilisateur:").grid(column=0, row=0)
     number = tk.StringVar()
-    numberChosen = ttk.Combobox(win, width=12, textvariable=number) 
+    numberChosen = ttk.Combobox(win, state="readonly", width=12, textvariable=number) 
     numberChosen['values'] = (1, 2)
     numberChosen.grid(column=0, row=1)
     numberChosen.current(0)

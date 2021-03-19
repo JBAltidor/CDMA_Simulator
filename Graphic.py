@@ -24,23 +24,31 @@ def show_menu(e):
 def Start ():    
     make_menu(win)
     win.title("CDMA Simulator")
+
     # drop down menu
     ttk.Label(win, text="Nombre d'utilisateur:").grid(column=0, row=0)
+    optionss = ['1','1','2']
     number = tk.StringVar()
-    numberChosen = ttk.Combobox(win, state="readonly", width=12, textvariable=number) 
-    numberChosen['values'] = (1, 2)
+    numberChosen = ttk.OptionMenu(win,number, *optionss) 
     numberChosen.grid(column=0, row=1)
-    numberChosen.current(0)
+
+
+    
+    # numberChosen = ttk.Combobox(win, state="readonly", width=12, textvariable=number) 
+    # numberChosen['values'] = (1, 2)
+    # numberChosen.grid(column=0, row=1)
+    # numberChosen.current(0)
     
 
      # drop down menu
     ttk.Label(win, text="Facteur d'étalement:").grid(column=1, row=0)
-    options =['8', '16']
+    options =['8', '8' ,'16']
     option_Menu = tk.StringVar()
-    option_Menu.set(2)
+    # option_Menu.set('8')
     factorChosen = ttk.OptionMenu(win,option_Menu, *options) 
     factorChosen.grid(column=1, row=1)    
     
+    #check box
     var1 = tk.IntVar()
     c1 = tk.Checkbutton(win, text='Mode Verbose',variable=var1, onvalue=1, offvalue=0)
     c1.grid(column=2, row=1)
@@ -62,11 +70,11 @@ def Start ():
     ttk.Label(win, text="Message 2:").grid(column=0, row=6)
     msg_2 = scrolledtext.ScrolledText(win, width=30, height=3, wrap=tk.WORD)
     msg_2.grid(column=0, row=7, sticky='WE', columnspan=3 )
-    if(numberChosen.get() == 1):
+    if(number.get() == 1):
         msg_2.configure(state="disabled")
         # button
     
-    action = ttk.Button(win, text="Start", command= lambda: Start_simulation(numberChosen.get(),option_Menu.get(),var1.get(), slider.get()/100, msg_1.get('1.0', 'end-1c'), msg_2.get('1.0', 'end-1c')))
+    action = ttk.Button(win, text="Start", command= lambda: Start_simulation(number.get(),option_Menu.get(),var1.get(), slider.get()/100, msg_1.get('1.0', 'end-1c'), msg_2.get('1.0', 'end-1c')))
     action.grid(column=2, row=8)
     
     

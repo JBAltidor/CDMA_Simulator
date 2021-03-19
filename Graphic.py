@@ -35,11 +35,16 @@ def Start ():
 
      # drop down menu
     ttk.Label(win, text="Facteur d'étalement:").grid(column=1, row=0)
-    factor = tk.StringVar()
-    factorChosen = ttk.Combobox(win, width=12, textvariable=factor) 
-    factorChosen['values'] = (8, 16)
-    factorChosen.grid(column=1, row=1)
-    factorChosen.current(0)
+    options =['8', '16']
+    option_Menu = tk.StringVar()
+    option_Menu.set(2)
+    factorChosen = ttk.OptionMenu(win,option_Menu, *options) 
+    factorChosen.grid(column=1, row=1)    
+    
+    var1 = tk.IntVar()
+    c1 = tk.Checkbutton(win, text='Mode Verbose',variable=var1, onvalue=1, offvalue=0)
+    c1.grid(column=2, row=1)
+   
     
     
 
@@ -61,12 +66,12 @@ def Start ():
         msg_2.configure(state="disabled")
         # button
     
-    action = ttk.Button(win, text="Start", command= lambda: Start_simulation(numberChosen.get(),factorChosen.get(), slider.get()/100, msg_1.get('1.0', 'end-1c'), msg_2.get('1.0', 'end-1c')))
+    action = ttk.Button(win, text="Start", command= lambda: Start_simulation(numberChosen.get(),option_Menu.get(),var1.get(), slider.get()/100, msg_1.get('1.0', 'end-1c'), msg_2.get('1.0', 'end-1c')))
     action.grid(column=2, row=8)
     
     
 
-def Start_simulation(nombre_users, factor, bruit, msg_1, msg_2):
+def Start_simulation(nombre_users, factor,verbose, bruit, msg_1, msg_2):
     # action.configure(text='Start')
     print('=========== Start simulation ===========')
     print('Nombre d utilisateurs: '+nombre_users)
@@ -86,11 +91,22 @@ def Start_simulation(nombre_users, factor, bruit, msg_1, msg_2):
     if nombre_users =='1':
         #saving input as bits for BER analysis 
         input_1 = cdma.binaire_to_ternaire(cdma.text_to_bits(msg_1))
-
         Encoded_Volt = cdma.User_sending(msg_1,Cle_1)
         if (bruit > 0):
             Traffic = cdma.Multiplexing(Encoded_Volt ,cdma.Noise_Generator(len(Encoded_Volt),bruit ))
         else : Traffic = Encoded_Volt
+        if (verbose ==1):
+            print(">>>>>>>>>>>>>>>>>>>>>>>>>>> Message du l'utilisateur en bits <<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+            print(input_1)
+            print()
+            print(">>>>>>>>>>>>>>>>>>>>>>>>>>> Message du l'utilisateur en Volt <<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+            print(Encoded_Volt)
+            print()
+            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>> Traffic sur le canal <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+            print(Traffic)
+            print()
+
+
     #Cas 2 users
     elif (nombre_users == '2'): 
         #saving input as bits for BER analysis 
@@ -104,37 +120,91 @@ def Start_simulation(nombre_users, factor, bruit, msg_1, msg_2):
         if (bruit > 0):
             Traffic = cdma.Multiplexing(cdma.Multiplexing(Encoded_Volt_1,Encoded_Volt_2),cdma.Noise_Generator(max(len(Encoded_Volt_1),len(Encoded_Volt_2)),bruit))
         else : Traffic = cdma.Multiplexing(Encoded_Volt_1,Encoded_Volt_2)
-  
+
+        if (verbose ==1):
+            print(">>>>>>>>>>>>>>>>>>>>>>>>> Message du l'utilisateur 1 en bits <<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+            print(input_2_1)
+            print()
+            print(">>>>>>>>>>>>>>>>>>>>>>>>> Message du l'utilisateur 1 en Volts <<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+            print(Encoded_Volt_1)
+            print()
+            print(">>>>>>>>>>>>>>>>>>>>>>>>> Message du l'utilisateur 2 en bits <<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+            print(input_2_2)
+            print()
+            print(">>>>>>>>>>>>>>>>>>>>>>>>> Message du l'utilisateur 2 en Volts <<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+            print(Encoded_Volt_2)
+            print()
+            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Traffic sur le canal <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+            print(Traffic)
+            print()
 
     #reception
     if nombre_users== '1':
         Reception=cdma.Decoder_1(Traffic,Cle_1)
-        print("Reception")
+        if (verbose ==1):
+            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>> Message a la reception en bits <<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+            print(Reception)
+            print()
+            print("_____________________________________________________________________________________________________________________________________________________________________________")
+            print()
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Reception <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
         #Back to Text 
         try :
             print (cdma.Back_to_text(Reception))
         except:
             print ("Erreurs dans la reconversion en ASCII")
         
-        cdma.BER(input_1,Reception)
+        er =cdma.BER(input_1,Reception)
+        print()
+        if (verbose ==1):
+            print(">>>>>>>>>>>>>>>>>>>>>>>>> Nombre de bits errones <<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+            print(er)
+            print()
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Taux d'erreur <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+        print("{:.2f} %".format(er/len(input_1)))
 
     elif nombre_users== '2':
         Reception_1 = cdma.Decoder_1(Traffic[:long1],Cle_1)
         Reception_2 = cdma.Decoder_1(Traffic[:long2],Cle_2)
-        print("Reception 1")
+        if (verbose ==1):
+            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>> Message 1 a la reception en bits <<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+            print(Reception_1)
+            print()
+            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>> Message 2 a la reception en bits <<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+            print(Reception_2)
+            print()
+            print("_____________________________________________________________________________________________________________________________________________________________________________")
+            print()
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Reception 1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
         try :
             print(cdma.Back_to_text(Reception_1))
         except:
             print ("Erreurs dans la reconversion en ASCII")
        
-        cdma.BER(input_2_1,Reception_1)
-        print("==============")
-        print("Reception 2")
+        er1 = cdma.BER(input_2_1,Reception_1)
+        print()
+        if (verbose ==1):
+            print(">>>>>>>>>>>>>>>>>>>>>>>>> Nombre de bits errones pour message 1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+            print(er1)
+            print()
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Taux d'erreur pour message 1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+        print("{:.2f} %".format(er1/len(input_2_1)))
+
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Reception 2 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+
         try :
             print(cdma.Back_to_text(Reception_2))
         except:
             print ("Erreur dans la reconversion en ASCII")
-        cdma.BER(input_2_2,Reception_2)
+        
+        er2 = cdma.BER(input_2_2,Reception_2)
+        print()
+        if (verbose ==1):
+            print(">>>>>>>>>>>>>>>>>>>>>>>>> Nombre de bits errones pour message 2 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+            print(er2)
+            print()
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Taux d'erreur pour message 2 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+        print("{:.2f} %".format(er2/len(input_2_2)))
  
 if __name__ == '__main__':
     Start() 
